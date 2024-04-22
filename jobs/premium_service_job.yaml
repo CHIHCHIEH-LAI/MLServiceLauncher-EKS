@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: premium-service-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: premium-classifier-container
+        image: jjyyjay/claissifier-image
+        resources:
+          limits:
+            cpu: "0.9"  # Set the CPU limit to 0.9
+          requests:
+            cpu: "0.9"  # Set the CPU request to 0.9
+        env:
+        - name: DATASET
+          value: mnist
+        - name: TYPE
+          value: cnn
+      restartPolicy: Never
